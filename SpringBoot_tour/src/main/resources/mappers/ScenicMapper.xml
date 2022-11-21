@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinnn.tour.mapper.ScenicMapper">
+
+    <!-- 获取所有景点列表并按id顺序排序 -->
+    <select id="getScenicListByPage" resultType="com.xinnn.tour.pojo.Scenic">
+        select * from t_scenic order by id
+    </select>
+
+    <resultMap id="scenicMap" type="com.xinnn.tour.pojo.Scenic">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="scenic_date" property="scenicDate"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="click_num" property="clickNum"/>
+    </resultMap>
+    <select id="getScenicById" resultMap="scenicMap">
+        select * from t_scenic where id = #{id}
+    </select>
+
+    <!-- 获取景点点击排行榜  -->
+    <select id="getScenicTop" resultType="com.xinnn.tour.pojo.Scenic">
+        select * from t_scenic order by click_num desc limit 10
+    </select>
+
+    <!-- 通过子查询 增加景点点击量 -->
+    <update id="addScenicClickNumById">
+        update t_scenic set click_num = (select click_num from t_scenic where id = #{id}) + 1 where id = #{id}
+    </update>
+
+    <!-- 获取景点总数 -->
+    <select id="getScenicSumNum" resultType="Integer">
+        select count(id) from t_scenic
+    </select>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinnn.tour.mapper.UserMapper">
+
+    <!-- 登录方法 返回一个user对象 -->
+    <select id="login" resultType="com.xinnn.tour.pojo.User">
+        select * from t_user where username = #{username} and passwd = #{passwd}
+    </select>
+
+    <resultMap id="userMap" type="com.xinnn.tour.pojo.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="author_imr" property="authorImg"/>
+    </resultMap>
+    <!-- 获取评论列表方法的第二步 不需要密码 所以不做映射 -->
+    <select id="getUserById" resultMap="userMap">
+        select id,username,author_img from t_user where id = #{id}
+    </select>
+
+    <!-- 注册方法 插入成功后给传入的user对象返回自增的主键id -->
+    <insert id="sign" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user(username,passwd,author_img) values(#{username},#{passwd},#{authorImg})
+    </insert>
+
+</mapper>

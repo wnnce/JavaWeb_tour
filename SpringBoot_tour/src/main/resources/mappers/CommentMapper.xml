@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinnn.tour.mapper.CommentMapper">
+
+    <resultMap id="commentMap" type="com.xinnn.tour.pojo.Comment">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="comment_date" property="commentDate"/>
+        <result column="scenic_id" property="scenicId"/>
+        <!-- 分步查询 通过用户id获取一个用户实体-->
+        <association property="user"
+                     select="com.xinnn.tour.mapper.UserMapper.getUserById"
+                     column="user_id"/>
+    </resultMap>
+    <select id="getCommentListByScenicId" resultMap="commentMap">
+        select * from t_comment where scenic_id = #{scenicId} order by comment_date desc
+    </select>
+
+    <insert id="addComment">
+        insert into t_comment(content,comment_date,user_id,scenic_id) values (#{content},#{commentDate},#{user.id},#{scenicId})
+    </insert>
+
+    <select id="getCommentSumNum" resultType="Integer">
+        select count(id) from t_comment where scenic_id = #{scenicId}
+    </select>
+
+</mapper>

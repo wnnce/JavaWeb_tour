@@ -1,0 +1,26 @@
+server:
+  port: 8088
+  servlet:
+    session:
+      timeout: 3600
+spring:
+  gson:
+    date-format: yyyy-MM-dd HH-mm-ss
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost/zhsx
+    username:
+    password:
+  data:
+    solr:
+      host: http://localhost/solr/tour
+mybatis:
+  type-aliases-package: com.xinnn.tour.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mappers/*.xml
+pagehelper:
+  helper-dialect: postgresql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql
