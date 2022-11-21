@@ -14,7 +14,7 @@ chrome_options.add_argument('user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWeb
 
 # 插入数据库
 def insert_db(scenic):
-    conn = psycopg2.connect(database="zhsx", user="lisang", password="00000...", host="120.46.151.166", port="5432")
+    conn = psycopg2.connect(database="zhsx", user="", password="", host="http://localhost", port="5432")
     cursor = conn.cursor()
     date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     sql = "insert into t_scenic(title,content,img_url,scenic_date) values (\'"+scenic[0]+"\',\'"+scenic[1]+"\',\'"+scenic[2]+"\',\'"+date+"\')"
