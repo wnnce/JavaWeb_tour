@@ -8,7 +8,7 @@ import Footer from "@/views/main/Footer.vue";
 </script>
 <template>
 <main v-if="$route.meta.show">
-  <Header :user="user" :sign-out="signOut"></Header>
+  <Header :user="user" :sign-out="signOut" :key-word="keyWord"></Header>
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-10 offset-1">
@@ -26,7 +26,7 @@ import Footer from "@/views/main/Footer.vue";
     </div>
   </div>
 </main>
-<router-view v-if="!$route.meta.show"></router-view>
+  <router-view v-if="!$route.meta.show"></router-view>
 </template>
 <script>
 import axios from "axios";

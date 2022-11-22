@@ -1,6 +1,6 @@
 <script setup>
 import '../../../public/css/bootstrap.min.css'
-defineProps(['user','signOut'])
+defineProps(['user','signOut','keyWord'])
 </script>
 
 <template>
@@ -21,8 +21,8 @@ defineProps(['user','signOut'])
         </div>
       </div>
       <div class="d-flex">
-        <input class="form-control me-2" placeholder="搜 索" v-model="keyWord" @keyup="clear">
-        <button class="btn btn-outline-success w-25" @click="search" :disabled="keyWord === ''">搜 索</button>
+        <input class="form-control me-2" placeholder="搜 索" v-model="value" @keyup="clear">
+        <button class="btn btn-outline-success w-25" @click="search" :disabled="value === ''">搜 索</button>
       </div>
     </div>
   </nav>
@@ -32,19 +32,24 @@ import bus from 'vue3-eventbus'
 export default {
   data(){
     return{
-      keyWord: ''
+      value: ''
     }
   },
   methods:{
     //向事件总线传入事件 参数为搜索的值
     search(){
-      bus.emit('search', this.keyWord)
+      bus.emit('search', this.value)
     },
     //传入事件 清空搜索值
     clear(){
-      if (this.keyWord === ''){
+      if (this.value === ''){
         bus.emit('search', undefined)
       }
+    }
+  },
+  mounted() {
+    if(this.keyWord !== undefined){
+      this.value = this.keyWord
     }
   }
 }
