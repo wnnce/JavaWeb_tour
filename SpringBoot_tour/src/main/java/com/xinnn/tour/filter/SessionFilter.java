@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * 拦截器 创建Session 为Response添加标头 解决跨域问题
+ * 过滤器 创建Session 为Response添加标头 解决跨域问题
  */
 @Component
 public class SessionFilter implements Filter {

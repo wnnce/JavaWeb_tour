@@ -79,4 +79,16 @@ public class Scenic {
     public void setClickNum(Integer clickNum) {
         this.clickNum = clickNum;
     }
+
+    @Override
+    public String toString() {
+        return "Scenic{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", scenicDate=" + scenicDate +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", clickNum=" + clickNum +
+                '}';
+    }
 }

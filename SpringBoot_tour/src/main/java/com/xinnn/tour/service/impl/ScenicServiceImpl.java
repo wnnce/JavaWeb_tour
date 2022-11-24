@@ -1,5 +1,6 @@
 package com.xinnn.tour.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xinnn.tour.mapper.ScenicMapper;
 import com.xinnn.tour.pojo.Scenic;
@@ -33,15 +34,21 @@ public class ScenicServiceImpl implements ScenicService {
     private SolrClient solrClient;
 
     @Override
-    public List<Scenic> getScenicListByPage(Integer page) {
+    public Map<String, Object> getScenicListByPage(Integer page) {
         //使用pagehelper插件自动获取分页 固定每页5条数据
-        PageHelper.startPage(page, 5);
+        Page<Object> pageObj = PageHelper.startPage(page, 5);
         List<Scenic> scenicList =  scenicMapper.getScenicListByPage();
         for(Scenic scenic : scenicList){
             //截取景点简介 景点列表中只显示一部分简介
             scenic.setContent(StringUtil.cutString(scenic.getContent()));
         }
-        return scenicList;
+        Map<String, Object> map = new HashMap<>();
+        //添加当前页
+        map.put("currPage", pageObj.getPageNum());
+        //添加总页数
+        map.put("sumPage", pageObj.getPages());
+        map.put("scenicList", scenicList);
+        return map;
     }
 
     @Override
@@ -61,12 +68,6 @@ public class ScenicServiceImpl implements ScenicService {
         scenicMapper.addScenicClickNumById(id);
     }
 
-    @Override
-    public Integer getScenicSumPage() {
-        Integer sumNum = scenicMapper.getScenicSumNum();
-        //将mapper方法返回的总条数转换为页数返回
-        return (sumNum + 5) / 5;
-    }
 
     /**
      * 通过关键字和页码返回从solr查询的数据

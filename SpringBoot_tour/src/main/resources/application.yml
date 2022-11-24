@@ -5,15 +5,15 @@ server:
       timeout: 3600
 spring:
   gson:
-    date-format: yyyy-MM-dd HH-mm-ss
+    date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost/zhsx
-    username:
-    password:
+    url: jdbc:postgresql://120.46.151.166:5432/zhsx
+    username: lisang
+    password: "00000..."
   data:
     solr:
-      host: http://localhost/solr/tour
+      host: http://120.46.151.166:8983/solr/tour
 mybatis:
   type-aliases-package: com.xinnn.tour.pojo
   configuration:

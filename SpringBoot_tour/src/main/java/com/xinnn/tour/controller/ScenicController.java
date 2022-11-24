@@ -1,5 +1,6 @@
 package com.xinnn.tour.controller;
 
+import com.github.pagehelper.Page;
 import com.xinnn.tour.pojo.Scenic;
 import com.xinnn.tour.service.ScenicService;
 import com.xinnn.tour.util.ResultMap;
@@ -23,13 +24,8 @@ public class ScenicController {
     //根据前端请求的页码返回景点列表
     @RequestMapping("/tour/item")
     public Map<String, Object> tourItem(@RequestParam("page")Integer page){
-        List<Scenic> scenicList = scenicService.getScenicListByPage(page);
-        Integer sumPage = scenicService.getScenicSumPage();
-        //向map集合中添加当前页码和总页码 并返回给前端 方便前端做翻页判断
-        Map<String, Object> map = new HashMap<>();
-        map.put("currPage", page);
-        map.put("sumPage", sumPage);
-        map.put("scenicList", scenicList);
+        //获取当前页的详情
+        Map<String, Object> map = scenicService.getScenicListByPage(page);
         return ResultMap.resultJson(100,map);
     }
     //返回景点点击排行榜

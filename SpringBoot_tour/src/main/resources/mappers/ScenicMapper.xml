@@ -31,9 +31,4 @@
         update t_scenic set click_num = (select click_num from t_scenic where id = #{id}) + 1 where id = #{id}
     </update>
 
-    <!-- 获取景点总数 -->
-    <select id="getScenicSumNum" resultType="Integer">
-        select count(id) from t_scenic
-    </select>
-
 </mapper>

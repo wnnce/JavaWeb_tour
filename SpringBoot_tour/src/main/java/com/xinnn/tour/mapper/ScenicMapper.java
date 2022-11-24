@@ -33,9 +33,4 @@ public interface ScenicMapper {
      */
     void addScenicClickNumById(@Param("id")Integer id);
 
-    /**
-     * 获取景点的总条数
-     * @return
-     */
-    Integer getScenicSumNum();
 }

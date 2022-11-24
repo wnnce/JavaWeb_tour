@@ -42,7 +42,7 @@ public class UserController {
             return ResultMap.resultJson(500,"系统异常");
         }
     }
-    //获取user对象 携带Cookie的情况下 拦截器会将用户信息保存到session里面 客户端无需登录也能看到用户信息
+    //获取user对象
     @RequestMapping("/tour/user")
     public Map<String, Object> user(HttpSession session){
         User user = (User) session.getAttribute("currUser");

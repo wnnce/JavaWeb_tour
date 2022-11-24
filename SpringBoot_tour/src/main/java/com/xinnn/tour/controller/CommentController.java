@@ -40,13 +40,8 @@ public class CommentController {
     //根据景点id和页码向前端返回评论列表
     @RequestMapping("/tour/comments")
     public Map<String, Object> getCommentList(@RequestParam("scenicId")Integer scenicId,@RequestParam("page")Integer page){
-        List<Comment> commentList = commentService.getCommentListByScenicId(scenicId, page);
-        Integer sumPage = commentService.getCommentSumPage(scenicId);
-        //添加当前页码和总页数 方便前端做翻页判断
-        Map<String, Object> map = new HashMap<>();
-        map.put("currPage", page);
-        map.put("sumPage", sumPage);
-        map.put("commentList", commentList);
+        //获取当前页的详情
+        Map<String, Object> map = commentService.getCommentListByScenicId(scenicId, page);
         return ResultMap.resultJson(100, map);
     }
 }
