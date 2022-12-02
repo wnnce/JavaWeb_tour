@@ -24,16 +24,18 @@ import Footer from "@/views/main/Footer.vue";
           <!-- 不是登录用户不能提交评论 -->
           <button class="submit_btn btn btn-primary mt-3 offset-10" value="" :disabled="isUser == 0" @click="addComment">提 交</button>
         </div>
-        <div v-if="scenic.commentList == '' " class="text-center">
+        <div v-if="commentList == '' " class="text-center">
           <h6>还没有评论哦</h6>
         </div>
-        <div v-else="scenic.commentList == '' " class="comment_list col-md-12" v-for="comment in commentList">
-          <img :src="comment.user.authorImg" width="36" height="36"><span>&nbsp;&nbsp;&nbsp;</span>
-          <span>{{comment.user.username}}</span>
-          <div class="comment_text">{{comment.content}}</div>
-          <div class="comment_date">发布于: {{comment.commentDate}}</div>
+        <div v-else="commentList == '' " >
+          <div class="comment_list col-md-12" v-for="comment in commentList">
+            <img :src="comment.user.authorImg" width="36" height="36"><span>&nbsp;&nbsp;&nbsp;</span>
+            <span>{{comment.user.username}}</span>
+            <div class="comment_text">{{comment.content}}</div>
+            <div class="comment_date">发布于: {{comment.commentDate}}</div>
+          </div>
+          <Footer :page="page" :sum-page="sumPage" :flash-list="getCommentList"></Footer>
         </div>
-        <Footer :page="page" :sum-page="sumPage" :flash-list="getCommentList"></Footer>
       </div>
     </div>
   </div>
