@@ -8,12 +8,12 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://120.46.151.166:5432/zhsx
-    username: lisang
-    password: "00000..."
+    url: jdbc:postgresql://localhost/zhsx
+    username: 
+    password: 
   data:
     solr:
-      host: http://120.46.151.166:8983/solr/tour
+      host: http://localhost/solr/tour
 mybatis:
   type-aliases-package: com.xinnn.tour.pojo
   configuration:
